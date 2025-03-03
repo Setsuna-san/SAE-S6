@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS Utilisateur;
 
 -- Table Utilisateur
 CREATE TABLE Utilisateur (
-    id INT PRIMARY KEY AUTO_INCREMENT,
+    id CHAR(36) PRIMARY KEY DEFAULT (UUID()),
     nom VARCHAR(100) NOT NULL,
     prenom VARCHAR(100) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
@@ -20,15 +20,15 @@ CREATE TABLE Utilisateur (
 
 -- Table Sportif (hérite de Utilisateur)
 CREATE TABLE Sportif (
-    id INT PRIMARY KEY REFERENCES Utilisateur(id) ON DELETE CASCADE,
+    id CHAR(36) PRIMARY KEY REFERENCES Utilisateur(id) ON DELETE CASCADE,
     date_inscription DATE NOT NULL DEFAULT CURRENT_DATE,
     niveau_sportif VARCHAR(20) NOT NULL
 );
 
 -- Table Coach (hérite de Utilisateur)
 CREATE TABLE Coach (
-    id INT PRIMARY KEY REFERENCES Utilisateur(id) ON DELETE CASCADE,
-    specialites TEXT[],
+    id CHAR(36) PRIMARY KEY REFERENCES Utilisateur(id) ON DELETE CASCADE,
+    specialites TEXT NOT NULL,
     tarif_horaire DECIMAL(10,2) NOT NULL
 );
 
@@ -47,29 +47,29 @@ CREATE TABLE Seance (
     date_heure TIMESTAMP NOT NULL,
     type_seance VARCHAR(10) NOT NULL,
     theme_seance VARCHAR(50) NOT NULL,
-    coach_id INT NOT NULL REFERENCES Coach(id) ON DELETE CASCADE,
+    coach_id CHAR(36) NOT NULL REFERENCES Coach(id) ON DELETE CASCADE,
     statut VARCHAR(20) NOT NULL,
     niveau_seance VARCHAR(20) NOT NULL
 );
 
 -- Table de liaison Séance - Sportif (ManyToMany)
 CREATE TABLE Seance_Sportif (
-    seance_id INT REFERENCES Seance(id) ON DELETE CASCADE,
-    sportif_id INT REFERENCES Sportif(id) ON DELETE CASCADE,
+    seance_id INT NOT NULL REFERENCES Seance(id) ON DELETE CASCADE,
+    sportif_id CHAR(36) NOT NULL REFERENCES Sportif(id) ON DELETE CASCADE,
     PRIMARY KEY (seance_id, sportif_id)
 );
 
 -- Table de liaison Séance - Exercice (ManyToMany)
 CREATE TABLE Seance_Exercice (
-    seance_id INT REFERENCES Seance(id) ON DELETE CASCADE,
-    exercice_id INT REFERENCES Exercice(id) ON DELETE CASCADE,
+    seance_id INT NOT NULL REFERENCES Seance(id) ON DELETE CASCADE,
+    exercice_id INT NOT NULL REFERENCES Exercice(id) ON DELETE CASCADE,
     PRIMARY KEY (seance_id, exercice_id)
 );
 
 -- Table Fiche de paie
 CREATE TABLE Fiche_de_paie (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    coach_id INT NOT NULL REFERENCES Coach(id) ON DELETE CASCADE,
+    coach_id CHAR(36) NOT NULL REFERENCES Coach(id) ON DELETE CASCADE,
     periode VARCHAR(20) NOT NULL,
     total_heures INT NOT NULL,
     montant_total DECIMAL(10,2) NOT NULL
