@@ -1,0 +1,6 @@
+<h2>Liste des utilisateurs</h2>
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let utilisateur of utilisateurs">
+    {{ utilisateur.nom }} ( {{ utilisateur.prenom }} )  -  ({{ utilisateur.type }})
+  </li>
+</ul>

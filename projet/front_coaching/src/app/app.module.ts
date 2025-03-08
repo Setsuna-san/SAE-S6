@@ -6,10 +6,16 @@ import { AppComponent } from './app.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { HomeComponent } from './home/home.component';
+import { SeanceListComponent } from './seance-list/seance-list.component';
+import { UtilisateurListComponent } from './utilisateur-list/utilisateur-list.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    SeanceListComponent,
+    UtilisateurListComponent
   ],
   imports: [
     HttpClientModule,
