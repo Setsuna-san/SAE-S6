@@ -13,7 +13,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class CoachController extends AbstractController
 {
-    #[Route('/api/coaches', methods: ['GET'])]
+    #[Route('/api/coachs', methods: ['GET'])]
     public function index(CoachRepository $coachRepository): JsonResponse
     {
         $coaches = $coachRepository->findAll();
