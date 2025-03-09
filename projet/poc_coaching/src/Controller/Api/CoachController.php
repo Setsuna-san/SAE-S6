@@ -29,7 +29,7 @@ class CoachController extends AbstractController
         $data = json_decode($request->getContent(), true);
 
         if (!$data || !isset($data['email'], $data['password'], $data['nom'], $data['prenom'], $data['specialites'], $data['tarif_horaire'])) {
-            return $this->json(['error' => 'Données invalides'], JsonResponse::HTTP_BAD_REQUEST);
+            return $this->json(['error' => 'donnees invalide'], JsonResponse::HTTP_BAD_REQUEST);
         }
 
         $coach = new Coach();
