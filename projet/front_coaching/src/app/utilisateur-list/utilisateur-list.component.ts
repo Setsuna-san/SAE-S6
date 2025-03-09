@@ -3,6 +3,7 @@ import { Utilisateur } from '../models/utilisateur';
 import { ApiService } from '../services/api.service';
 import { Etatload } from '../models/etatLoad';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-utilisateur-list',
@@ -17,11 +18,17 @@ export class UtilisateurListComponent implements OnInit{
 
   constructor(
     private apiService: ApiService,
-    private route: ActivatedRoute,
+    private authService: AuthService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
+    if (!this.authService.currentAuthUserValue.isLogged()) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
+
     this.apiService.getUtilisateurs().subscribe({
       next: (data) => {
         this.utilisateurs = data;
