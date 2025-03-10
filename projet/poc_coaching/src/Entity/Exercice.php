@@ -6,6 +6,7 @@ use ApiPlatform\Metadata\ApiResource;
 use App\Repository\ExerciceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -16,18 +17,23 @@ class Exercice
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['exercice:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Groups(['exercice:read'])]
     private ?string $nom = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['exercice:read'])]
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Groups(['exercice:read'])]
     private ?int $duree_estimee = null;
 
     #[ORM\Column(length: 20)]
+    #[Groups(['exercice:read'])]
     private ?string $difficulte = null;
 
     /**
