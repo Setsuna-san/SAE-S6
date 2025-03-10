@@ -8,21 +8,25 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CoachRepository::class)]
 class Coach extends Utilisateur
 {
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['coach:read'])]
     private ?string $specialites = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
+    #[Groups(['coach:read'])]
     private ?string $tarif_horaire = null;
 
     /**
      * @var Collection<int, Seance>
      */
     #[ORM\OneToMany(targetEntity: Seance::class, mappedBy: 'coach_id')]
+    #[Groups(['coach:read'])]
     private Collection $seances;
 
     public function __construct()

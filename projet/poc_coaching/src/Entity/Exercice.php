@@ -17,23 +17,23 @@ class Exercice
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['exercice:read'])]
+    #[Groups(['exercice:read', 'seance:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
-    #[Groups(['exercice:read'])]
+    #[Groups(['exercice:read', 'seance:read'])]
     private ?string $nom = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Groups(['exercice:read'])]
+    #[Groups(['exercice:read', 'seance:read'])]
     private ?string $description = null;
 
     #[ORM\Column]
-    #[Groups(['exercice:read'])]
+    #[Groups(['exercice:read', 'seance:read'])]
     private ?int $duree_estimee = null;
 
     #[ORM\Column(length: 20)]
-    #[Groups(['exercice:read'])]
+    #[Groups(['exercice:read', 'seance:read'])]
     private ?string $difficulte = null;
 
     /**
