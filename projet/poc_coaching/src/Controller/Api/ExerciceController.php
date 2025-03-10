@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 
-#[Route('/api/exercices')]
 class ExerciceController extends AbstractController
 {
     private EntityManagerInterface $entityManager;
@@ -22,14 +21,14 @@ class ExerciceController extends AbstractController
         $this->serializer = $serializer;
     }
 
-    #[Route('/', methods: ['GET'])]
+    #[Route('/api/exercices', methods: ['GET'])]
     public function index(ExerciceRepository $exerciceRepository): JsonResponse
     {
         $exercices = $exerciceRepository->findAll();
         return $this->json($exercices, 200, [], ['groups' => 'exercice:read']);
     }
 
-    #[Route('/{id}', methods: ['GET'])]
+    #[Route('/api/exercice/{id}', methods: ['GET'])]
     public function show(Exercice $exercice): JsonResponse
     {
         return $this->json($exercice, 200, [], ['groups' => 'exercice:read']);
