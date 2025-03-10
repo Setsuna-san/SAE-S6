@@ -1,0 +1,11 @@
+.ricardo {
+  background-image: url("../../assets/images/home.gif");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 223px;
+  height: 184px;
+}
+
+.flex {
+  display: flex;
+}

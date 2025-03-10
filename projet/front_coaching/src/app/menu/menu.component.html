@@ -1,0 +1,58 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">POC App</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+      aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/coachs">Coachs</a>
+        </li>
+
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+            aria-expanded="false">Séances</a>
+          <div class="dropdown-menu">
+            <div *ngIf="authService.currentAuthUserValue.isLogged()">
+              <a class="disabled btn"> Personnelles</a>
+              <a class="dropdown-item" routerLink="/seances">Mes séances</a>
+              <a class="dropdown-item" routerLink="/seances">Historique</a>
+            </div>
+
+            <div class="dropdown-divider" *ngIf="authService.currentAuthUserValue.isLogged()"></div>
+
+            <div>
+              <a class="disabled btn"> Générales</a>
+
+              <a class="dropdown-item" routerLink="/seances">Liste</a>
+              <a class="dropdown-item" routerLink="/plannings">Plannings</a>
+            </div>
+
+          </div>
+        </li>
+      </ul>
+
+      <div class="d-flex">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item" *ngIf="authService.currentAuthUserValue.isLogged()">
+            <button class="nav-link" (click)="logout()">
+              Déconnexion
+            </button>
+          </li>
+          <li class="nav-item" *ngIf="!authService.currentAuthUserValue.isLogged()">
+            <a class="nav-link" routerLink="/login">Connexion</a>
+          </li>
+          <li class="nav-item " *ngIf="!authService.currentAuthUserValue.isLogged()">
+            <a class="nav-link" routerLink="/register">Inscription</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
