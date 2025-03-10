@@ -8,20 +8,24 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: SportifRepository::class)]
 class Sportif extends Utilisateur
 {
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups(['sportif:read'])]
     private ?\DateTimeInterface $dateInscription = null;
 
     #[ORM\Column(length: 20)]
+    #[Groups(['sportif:read'])]
     private ?string $niveauSportif = null;
 
     /**
      * @var Collection<int, Seance>
      */
     #[ORM\ManyToMany(targetEntity: Seance::class, mappedBy: 'sportifs')]
+    #[Groups(['sportif:read'])]
     private Collection $seances;
 
     public function __construct()

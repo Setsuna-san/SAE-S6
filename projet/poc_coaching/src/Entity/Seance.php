@@ -16,27 +16,27 @@ class Seance
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups('seance:read', 'coach:read')]
+    #[Groups('seance:read', 'coach:read', 'sportif:read')]
     private ?int $id = null;
 
     #[ORM\Column]
-    #[Groups('seance:read', 'coach:read')]
+    #[Groups('seance:read', 'coach:read', 'sportif:read')]
     private ?\DateTimeImmutable $date_heure = null;
 
     #[ORM\Column(length: 10)]
-    #[Groups('seance:read', 'coach:read')]
+    #[Groups('seance:read', 'coach:read', 'sportif:read')]
     private ?string $type_seance = null;
 
     #[ORM\Column(length: 50)]
-    #[Groups('seance:read', 'coach:read')]
+    #[Groups('seance:read', 'coach:read', 'sportif:read')]
     private ?string $theme_seance = null;
 
     #[ORM\Column(length: 20)]
-    #[Groups('seance:read', 'coach:read')]
+    #[Groups('seance:read', 'coach:read', 'sportif:read')]
     private ?string $statut = null;
 
     #[ORM\Column(length: 20)]
-    #[Groups('seance:read', 'coach:read')]
+    #[Groups('seance:read', 'coach:read', 'sportif:read')]
     private ?string $niveau_seance = null;
 
     #[ORM\ManyToOne]
