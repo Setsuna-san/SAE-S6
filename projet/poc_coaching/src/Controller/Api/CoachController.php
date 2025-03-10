@@ -24,7 +24,7 @@ class CoachController extends AbstractController
     }
 
     #[Route('/api/coach/{id}/seances', methods: ['GET'])]
-    public function getExercices(Coach $coach): JsonResponse
+    public function getSeances(Coach $coach): JsonResponse
     {
         $seances = $coach->getSeances();
         return $this->json($seances, 200, [], ['groups' => 'seance:read']);
