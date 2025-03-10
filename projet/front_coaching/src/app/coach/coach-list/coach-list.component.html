@@ -1,0 +1,56 @@
+<h2>
+  Liste des coachs
+</h2>
+<br>
+
+<table class="table table-hover">
+  <thead>
+    <tr class="sticky-top ">
+      <th scope="col">Prenom</th>
+      <th scope="col">Nom</th>
+      <th scope="col">Spécialité</th>
+      <th scope="col">Tarif horaire</th>
+      <th></th>
+
+    </tr>
+  </thead>
+  <thead *ngIf="etatLoad == etatLoading.ERREUR || etatLoad == etatLoading.LOADING ">
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    <tr class="text-center" *ngIf="etatLoad == etatLoading.ERREUR">
+      <th colspan="10">Aucun coach trouvé</th>
+    </tr>
+    <tr class="text-center" *ngIf="etatLoad == etatLoading.LOADING">
+      <th colspan="10"> <i class="fa-solid fa-spinner fa-spin-pulse"></i></th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody *ngIf="etatLoad == etatLoading.SUCCESS">
+
+    <tr class="table-lightcursor" routerLink="/coach/{{coach.id}}" *ngFor="let coach of coachs">
+      <th> <a routerLink="/coach/{{coach.id}}"> {{ coach.prenom}} </a> </th>
+      <th> {{ coach.nom}}</th>
+      <th> {{ coach.specialites}}</th>
+      <th> {{ coach.tarif_horaire}}</th>
+    </tr>
+  </tbody>
+</table>
+
+<!-- <div class="alert alert-dismissible alert-warning" *ngIf="etatLoad == etatLoading.ERREUR ">
+  <h4 class="alert-heading">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    Service non disponible
+  </h4>
+</div> -->

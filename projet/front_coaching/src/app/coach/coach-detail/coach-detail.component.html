@@ -1,0 +1,64 @@
+<div class="card text-black bg-light mb-3" style="max-width: 70vw;">
+  <div class="card-header lead text-bg-dark m-3 mb-0">
+
+    <span *ngIf="etatLoad == etatLoading.SUCCESS">Coach Philippe Bertrand </span>
+    <span *ngIf="etatLoad == etatLoading.ERREUR">Coach introuvable </span>
+
+
+
+  </div>
+  <div class="card-body m-3 mt-2" *ngIf="etatLoad == etatLoading.SUCCESS">
+    <h4 class="card-title">Informations </h4>
+    <div class="card-text " style="padding-left: 3rem;">
+      <strong>
+        Nom et prénom :
+      </strong>
+      Bertrand Philippe <br> <br>
+
+      <strong>
+        Spécilatée(s) :
+      </strong>
+      perte de poids <br>
+
+      <strong>
+        Tarif horaire :
+      </strong>
+      3€/h <br>
+
+
+    </div>
+    <br>
+    <h4 class="card-title">Séances <span class="badge bg-primary"> {{ seances.length }} </span> </h4>
+
+
+    <div class="card-text">
+      <ul class="list-unstyled">
+        <li *ngFor="let seance of seances">
+          {{seance.date_heure }} - {{ seance.exercices.length}} exercices (
+          {{seance.statut}} )
+        </li>
+      </ul>
+
+
+    </div>
+  </div>
+  <div class="card-body m-3 mt-2" *ngIf="etatLoad == etatLoading.ERREUR">
+    <h4 class="card-title">Aucun coach ne correspond </h4>
+    <div class="card-text " style="padding-left: 3rem;">
+      <strong>
+        Que faire ?
+      </strong>
+      <br>
+
+      <ul>
+        <li>Vérifier si le coach existe dans <a routerLink="/coachs" class="link-green"> liste des coachs</a> </li>
+        <li>Contacter le service d'assistance en ligne </li>
+        <li>Contacter via téléphone un complexe sportif concerné </li>
+
+        <br>
+
+        <a routerLink="/" class="btn btn-outline-primary btn-sm">retourner a l'accueil</a>
+      </ul>
+
+    </div>
+  </div>

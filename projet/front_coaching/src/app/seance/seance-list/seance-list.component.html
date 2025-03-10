@@ -1,0 +1,20 @@
+<h2>Liste des séances
+
+  <span *ngIf="etatLoad == etatLoading.LOADING || etatLoad == etatLoading.WAITING ">
+    <i class="fa-solid fa-spinner fa-spin-pulse"></i>
+  </span>
+
+
+</h2>
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let seance of seances">
+    {{ seance.type_seance }} ( {{ seance.theme_seance }} )  -  ({{ seance.niveau_seance }})
+  </li>
+</ul>
+
+<div class="alert alert-dismissible alert-warning" *ngIf="etatLoad == etatLoading.ERREUR">
+  <h4 class="alert-heading">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    Service non disponible
+  </h4>
+</div>

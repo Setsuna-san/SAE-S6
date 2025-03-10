@@ -1,0 +1,10 @@
+
+.cursor {
+  cursor: pointer;
+}
+
+.cursor:hover .prenom {
+  cursor: pointer;
+  color: greenyellow;
+  transform: scale(130%);
+}
