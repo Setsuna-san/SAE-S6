@@ -8,3 +8,7 @@
   color: greenyellow;
   transform: scale(130%);
 }
+
+.sticky {
+  position: sticky;
+}

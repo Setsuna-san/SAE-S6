@@ -10,7 +10,6 @@ import { CoachDetailComponent } from './coach/coach-detail/coach-detail.componen
 const routes: Routes = [
   { path: '',            component: HomeComponent },
   { path: 'seances',  component: SeanceListComponent },
-  { path: 'utilisateurs',  component: UtilisateurListComponent },
   { path: 'coachs',  component: CoachListComponent },
   { path: 'coach/:id',  component: CoachDetailComponent },
   { path: 'login',  component: LoginComponent },
