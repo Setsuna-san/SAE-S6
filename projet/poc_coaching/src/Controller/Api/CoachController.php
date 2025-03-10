@@ -4,6 +4,8 @@ namespace App\Controller\Api;
 
 use App\Entity\Coach;
 use App\Repository\CoachRepository;
+use App\Repository\UtilisateurRepository;
+use Doctrine\ORM\Mapping\Id;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,9 +13,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class CoachController extends AbstractController
 {
     #[Route('/api/coachs', methods: ['GET'])]
-    public function index(CoachRepository $coachRepository): JsonResponse
+    public function index(CoachRepository $coachRepository, UtilisateurRepository $utilisateurRepository): JsonResponse
     {
-        $coachs = $coachRepository->findAll();
+        $coachs = $utilisateurRepository->findAllByRole("ROLE_COACH");
+        // $coachs = $coachRepository->findAll();
         return $this->json($coachs, 200, [], ['groups' => 'coach:read']);
     }
 

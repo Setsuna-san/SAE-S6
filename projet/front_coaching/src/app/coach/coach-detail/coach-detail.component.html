@@ -1,7 +1,7 @@
 <div class="card text-black bg-light mb-3" style="max-width: 70vw;">
   <div class="card-header lead text-bg-dark m-3 mb-0">
 
-    <span *ngIf="etatLoad == etatLoading.SUCCESS">Coach Philippe Bertrand </span>
+    <span *ngIf="etatLoad == etatLoading.SUCCESS">Coach   {{coach.prenom}} </span>
     <span *ngIf="etatLoad == etatLoading.ERREUR">Coach introuvable </span>
 
 
@@ -13,17 +13,17 @@
       <strong>
         Nom et prénom :
       </strong>
-      Bertrand Philippe <br> <br>
+      {{coach.nom}}    {{coach.prenom}}<br> <br>
 
       <strong>
         Spécilatée(s) :
       </strong>
-      perte de poids <br>
+      {{coach.specialites}}<br>
 
       <strong>
         Tarif horaire :
       </strong>
-      3€/h <br>
+      {{coach.tarif_horaire}} <br>
 
 
     </div>
@@ -42,6 +42,12 @@
 
     </div>
   </div>
+
+
+
+
+
+
   <div class="card-body m-3 mt-2" *ngIf="etatLoad == etatLoading.ERREUR">
     <h4 class="card-title">Aucun coach ne correspond </h4>
     <div class="card-text " style="padding-left: 3rem;">

@@ -20,4 +20,11 @@ class UtilisateurController extends AbstractController
         return $this->json($utilisateurs, 200, [], ['groups' => 'Utilisateur:read']);
     }
 
+    #[Route('/api/utilisateur/{id}', methods: ['GET'])]
+    public function show(Utilisateur $utilisateur): JsonResponse
+    {
+        return $this->json($utilisateur, 200, [], ['groups' => 'coach:read']);
+    }
+
+
 }

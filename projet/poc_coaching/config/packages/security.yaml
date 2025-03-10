@@ -47,9 +47,9 @@ security:
     - { path: ^/api/login, roles: PUBLIC_ACCESS }
     - {
         path: ^/api/utilisateurs,
-        roles: [ROLE_ADMIN, ROLE_SPORTIF, ROLE_COACH]
+        roles: [ROLE_ADMIN, ROLE_SPORTIF, ROLE_COACH],
       }
-    - { path: ^/api/utilisateur, roles: ROLE_ADMIN }
+    - { path: ^/api/utilisateur, roles: PUBLIC_ACCESS }
     - { path: ^/api, roles: PUBLIC_ACCESS }
 
 when@test:

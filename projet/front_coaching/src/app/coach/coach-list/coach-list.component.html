@@ -9,15 +9,11 @@
       <th scope="col">Prenom</th>
       <th scope="col">Nom</th>
       <th scope="col">Spécialité</th>
-      <th scope="col">Tarif horaire</th>
-      <th></th>
 
     </tr>
   </thead>
   <thead *ngIf="etatLoad == etatLoading.ERREUR || etatLoad == etatLoading.LOADING ">
     <tr>
-      <th></th>
-      <th></th>
       <th></th>
       <th></th>
       <th></th>
@@ -32,106 +28,16 @@
       <th></th>
       <th></th>
       <th></th>
-      <th></th>
-      <th></th>
     </tr>
-
-    <tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr><tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr><tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr><tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr><tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr><tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr><tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr><tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr><tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr><tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr><tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr><tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr><tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr><tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-
 
   </thead>
 
   <tbody *ngIf="etatLoad == etatLoading.SUCCESS">
 
-    <tr class="table-lightcursor" routerLink="/coach/{{coach.id}}" *ngFor="let coach of coachs">
+    <tr class="table-light cursor" routerLink="/coach/{{coach.id}}" *ngFor="let coach of coachs">
       <th> <a routerLink="/coach/{{coach.id}}"> {{ coach.prenom}} </a> </th>
       <th> {{ coach.nom}}</th>
       <th> {{ coach.specialites}}</th>
-      <th> {{ coach.tarif_horaire}}</th>
     </tr>
   </tbody>
 </table>
