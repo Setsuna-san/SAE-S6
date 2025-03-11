@@ -53,6 +53,12 @@ class SeanceCrudController extends AbstractCrudController
                 ]),
         ];
 
+        $fields[] = AssociationField::new('exercices', 'Exercices de la Séance')
+        ->setFormTypeOptions([
+            'by_reference' => false,
+        ])
+        ->setRequired(false);
+
         $coachs = $this->entityManager->getRepository(Utilisateur::class)->findAllByRole('ROLE_COACH'); //entité utilisateur avec le role coach
         // $coachs = $this->entityManager->getRepository(Coach::class)->findAll(); //entité coach
 
