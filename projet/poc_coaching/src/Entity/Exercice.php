@@ -126,4 +126,8 @@ class Exercice
 
         return $this;
     }
+    public function __toString(): string
+    {
+        return $this->nom ?? 'Exercice sans nom';
+    }
 }
