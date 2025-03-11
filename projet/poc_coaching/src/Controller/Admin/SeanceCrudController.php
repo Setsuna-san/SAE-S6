@@ -2,11 +2,17 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Coach;
 use App\Entity\Seance;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Utilisateur;
 
 class SeanceCrudController extends AbstractCrudController
 {
@@ -14,15 +20,62 @@ class SeanceCrudController extends AbstractCrudController
     {
         return Seance::class;
     }
+    private EntityManagerInterface $entityManager;
 
-    /*
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     public function configureFields(string $pageName): iterable
     {
-        return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+        $fields = [
+            IdField::new('id')->hideOnForm(),
+            DateTimeField::new('date_heure', 'Date et Heure'),
+            ChoiceField::new('type_seance', 'Type de Séance')
+                ->setChoices([
+                    'Solo' => 'solo',
+                    'Duo' => 'duo',
+                    'Trio' => 'trio',
+                ]),
+            TextField::new('theme_seance', 'Thème de la Séance'),
+            ChoiceField::new('statut', 'Statut')
+                ->setChoices([
+                    'Prévue' => 'prévue',
+                    'Validée' => 'validée',
+                    'Annulée' => 'annulée',
+                ]),
+            ChoiceField::new('niveau_seance', 'Niveau de la Séance')
+                ->setChoices([
+                    'Débutant' => 'débutant',
+                    'Intermédiaire' => 'intermédiaire',
+                    'Avancé' => 'avancé',
+                ]),
         ];
+
+        $coachs = $this->entityManager->getRepository(Utilisateur::class)->findAllByRole('ROLE_COACH'); //entité utilisateur avec le role coach
+        // $coachs = $this->entityManager->getRepository(Coach::class)->findAll(); //entité coach
+
+
+
+        $fields[] = AssociationField::new('coach', 'Coach Assigné') // entité utilisateur avec le role coach
+            ->setFormTypeOptions([
+                'choices' => $coachs,
+                'choice_label' => function (Utilisateur $user) {
+                    return $user->getNom() . ' ' . $user->getPrenom();
+                },
+            ])
+            ->setRequired(false);
+
+        // $fields[] = AssociationField::new('coach', 'Coach Assigné') // entité coach mais vide
+        // ->setFormTypeOptions([
+        //     'choices' => $coachs,
+        //     'choice_label' => function (Coach $coach) {
+        //         return $coach->getNom() . ' ' . $coach->getPrenom();
+        //     },
+        // ])
+        // ->setRequired(false);
+
+        return $fields;
     }
-    */
 }
