@@ -15,11 +15,11 @@ class Sportif extends Utilisateur
 {
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Groups(['sportif:read'])]
-    private ?\DateTimeInterface $dateInscription = null;
+    private ?\DateTimeInterface $date_inscription = null;
 
     #[ORM\Column(length: 20)]
     #[Groups(['sportif:read'])]
-    private ?string $niveauSportif = null;
+    private ?string $niveau_sportif = null;
 
     /**
      * @var Collection<int, Seance>
@@ -35,24 +35,24 @@ class Sportif extends Utilisateur
 
     public function getDateInscription(): ?\DateTimeInterface
     {
-        return $this->dateInscription;
+        return $this->date_inscription;
     }
 
-    public function setDateInscription(\DateTimeInterface $dateInscription): static
+    public function setDateInscription(\DateTimeInterface $date_inscription): static
     {
-        $this->dateInscription = $dateInscription;
+        $this->date_inscription = $date_inscription;
 
         return $this;
     }
 
     public function getNiveauSportif(): ?string
     {
-        return $this->niveauSportif;
+        return $this->niveau_sportif;
     }
 
-    public function setNiveauSportif(string $niveauSportif): static
+    public function setNiveauSportif(string $niveau_sportif): static
     {
-        $this->niveauSportif = $niveauSportif;
+        $this->niveau_sportif = $niveau_sportif;
 
         return $this;
     }

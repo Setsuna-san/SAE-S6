@@ -45,8 +45,8 @@ class SportifCrudController extends AbstractCrudController
             TextField::new('nom'),
             TextField::new('prenom'),
             EmailField::new('email'),
-            DateField::new('dateInscription', 'Date d\'inscription'),
-            ChoiceField::new('niveauSportif', 'Niveau Sportif')
+            DateField::new('date_inscription', 'Date d\'inscription'),
+            ChoiceField::new('niveau_sportif', 'Niveau Sportif')
                 ->setChoices([
                     'Débutant' => 'Débutant',
                     'Intermédiaire' => 'Intermédiaire',
