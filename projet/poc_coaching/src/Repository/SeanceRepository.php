@@ -16,12 +16,6 @@ class SeanceRepository extends ServiceEntityRepository
         parent::__construct($registry, Seance::class);
     }
 
-    public function findAllc(): ?array{
-        return $this->createQueryBuilder('u')
-            ->getQuery()
-            ->getResult();
-    }
-
 //    /**
 //     * @return Seance[] Returns an array of Seance objects
 //     */
