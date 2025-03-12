@@ -1,14 +1,13 @@
-
-.cursor {
-  cursor: pointer;
+.cursor:hover .displate {
+  color: black;
 }
 
-.cursor:hover .prenom {
-  cursor: pointer;
-  color: greenyellow;
-  transform: scale(130%);
+th {
+  transition: 0.4s;
 }
 
-.sticky {
-  position: sticky;
+.displate {
+  color: transparent;
 }
+
+

@@ -12,10 +12,11 @@ import { Coach } from '../../models/coach';
 })
 export class SeanceDetailComponent {
   public coach: Coach = new Coach();
+  public dureeTotal : number = 0 ;
 
   public seance: Seance = new Seance() ;
   public etatLoad = Etatload.LOADING;
-  public etatLoadSeances = Etatload.LOADING;
+  public etatLoadSeance = Etatload.LOADING;
 
   readonly etatLoading = Etatload;
 
@@ -27,21 +28,29 @@ export class SeanceDetailComponent {
     this.apiService.getSeanceById(this.seance.id).subscribe({
       next: (data) => {
         this.seance = data ;
-        this.etatLoad = Etatload.SUCCESS;
-
+        this.etatLoadSeance = Etatload.SUCCESS;
+        this.apiService.getCoachById(this.seance.coachId).subscribe({
+          next: (data) => {
+            this.totalDuree();
+            this.coach = data;
+            this.etatLoad = Etatload.SUCCESS;
+          },
+          error: () => (this.etatLoad = Etatload.ERREUR),
+        });
       },
-      error: () => (this.etatLoad = Etatload.ERREUR),
-    });
-
-
-    this.apiService.getCoachById(this.seance.coachId).subscribe({
-      next: (data) => {
-        this.coach = data;
-        this.etatLoad = Etatload.SUCCESS;
-      },
-      error: () => (this.etatLoadSeances = Etatload.ERREUR),
+      error: () => (this.etatLoadSeance = Etatload.ERREUR),
     });
 
 
   }
+
+  private totalDuree() {
+
+    this.seance.exercices.forEach(element => {
+      this.dureeTotal = this.dureeTotal + element.duree_estimee ;
+    });
+  }
+
+
+
 }

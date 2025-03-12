@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+.cursor {
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.cursor:hover {
+  text-decoration: underline;
+}
+
+
+.cursor:hover th {
+  transform: translatex(10px);
+}

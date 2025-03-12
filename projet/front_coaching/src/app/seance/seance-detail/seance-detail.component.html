@@ -1,27 +1,90 @@
 <div class="card text-black bg-light mb-3" style="max-width: 70vw;">
   <div class="card-header lead text-bg-dark m-3 mb-0">
-
-    <span *ngIf="etatLoad == etatLoading.SUCCESS">séance {{ seance.theme_seance}} </span>
-    <span *ngIf="etatLoad == etatLoading.ERREUR">séance introuvable </span>
+    Séance
+    <span *ngIf="etatLoadSeance == etatLoading.SUCCESS"> {{ seance.theme_seance}} - niveau {{seance.niveau_seance}}
+    </span>
+    <span *ngIf="etatLoadSeance == etatLoading.LOADING"> <i class="fa-solid fa-spinner fa-spin-pulse"></i> </span>
+    <span *ngIf="etatLoadSeance == etatLoading.ERREUR"> introuvable </span>
 
 
 
   </div>
-  <div class="card-body m-3 mt-2" *ngIf="etatLoad == etatLoading.SUCCESS">
-    <h4 class="card-title">Coach  {{ seance.coachId}}</h4>
+  <div class="card-body m-3 mt-2">
+    <h4 class="card-title">Séance</h4>
     <div class="card-text " style="padding-left: 3rem;">
-      <strong>
-      {{coach.nom}} {{coach.prenom}}   </strong>
-      <br> <br>
 
+      <strong> Statut :
+      </strong>
+      <span *ngIf="etatLoadSeance == etatLoading.LOADING">
+        <i class="fa-solid fa-spinner fa-spin-pulse"></i>
+      </span>
+      <span *ngIf="etatLoadSeance == etatLoading.SUCCESS">
+        {{seance.statut}}
+      </span>
+      <br>
+
+      <strong> Durée :
+      </strong>
+      <span *ngIf="etatLoadSeance == etatLoading.LOADING">
+        <i class="fa-solid fa-spinner fa-spin-pulse"></i>
+      </span>
+      <span *ngIf="etatLoadSeance == etatLoading.SUCCESS">
+        {{dureeTotal}}mins
+      </span>
+      <br>
+
+
+
+
+
+      <strong> Coach :
+      </strong>
+      <span *ngIf="etatLoad == etatLoading.LOADING">
+        <i class="fa-solid fa-spinner fa-spin-pulse"></i>
+      </span>
+      <span *ngIf="etatLoad == etatLoading.SUCCESS">
+        {{coach.nom}} {{coach.prenom}}
+      </span>
+      <p class="card-title"> <strong>Particpants : </strong>
+        <span *ngIf="etatLoad == etatLoading.SUCCESS"> {{ seance.exercices.length }} </span>
+        <span *ngIf="etatLoad == etatLoading.LOADING"> <i class="fa-solid fa-spinner fa-spin-pulse"></i> </span>
+      </p>
+
+      <strong> Theme :
+      </strong>
+      <span *ngIf="etatLoadSeance == etatLoading.LOADING">
+        <i class="fa-solid fa-spinner fa-spin-pulse"></i>
+      </span>
+      <span *ngIf="etatLoadSeance == etatLoading.SUCCESS">
+        {{seance.theme_seance}}
+      </span>
+    </div>
+
+    <br>
+
+    <h4 class="card-title">Exercices</h4>
+
+    <div class="card-text">
+      <ul class="list-unstyled">
+        <li class="cursor" routerLink="/exercice/{{exercice.id}}" *ngFor="let exercice of seance.exercices">
+
+          {{exercice.nom }} - {{ exercice.difficulte}} (
+          {{exercice.duree_estimee}}min )
+        </li>
+      </ul>
 
 
     </div>
-    <br>
-    <h4 class="card-title">Particpants : <span class="badge bg-primary"> {{ seance.exercices.length }} </span> </h4>
+
 
   </div>
-  <div class="card-body m-3 mt-2" *ngIf="etatLoad == etatLoading.ERREUR">
+  <br>
+
+
+
+
+
+  <div class="card-body m-3 mt-2" *ngIf="etatLoadSeance == etatLoading.ERREUR">
     <h4 class="card-title">Aucune seance ne correspond </h4>
     <div class="card-text " style="padding-left: 3rem;">
       <strong>

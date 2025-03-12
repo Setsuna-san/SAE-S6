@@ -34,9 +34,10 @@
   <tbody *ngIf="etatLoad == etatLoading.SUCCESS">
 
     <tr class="table-light cursor" routerLink="/coach/{{coach.id}}" *ngFor="let coach of coachs">
-      <th> <a routerLink="/coach/{{coach.id}}"> {{ coach.prenom}} </a> </th>
+      <th> {{ coach.prenom}}</th>
       <th> {{ coach.nom}}</th>
       <th> {{ coach.specialites}}</th>
+      <th>  <i class="fa-solid fa-arrow-right displate"></i> </th>
     </tr>
   </tbody>
 </table>
