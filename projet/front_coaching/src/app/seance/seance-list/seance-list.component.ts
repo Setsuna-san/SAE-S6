@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Seance } from '../../models/seance';
 import { ApiService } from '../../services/api.service';
 import { Etatload } from '../../models/etatLoad';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-seance-list',
@@ -15,34 +16,42 @@ export class SeanceListComponent {
   public etatLoad = Etatload.LOADING;
   readonly etatLoading = Etatload;
 
-  constructor(private apiService: ApiService) {}
+  constructor(
+    private apiService: ApiService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
-    this.apiService.getSeances().subscribe({
-      next: (data) => {
-        this.seances = data.map(
-          (seance: any) =>
-            new Seance(
-              seance.id,
-              new Date(seance.date_heure),
-              seance.type_seance,
-              seance.theme_seance,
-              seance.statut,
-              seance.niveau_seance,
-              seance.exercices,
-              seance.coach_id
-            )
-        );
+    if (this.authService.currentAuthUserValue.isLogged()) {
+      this.apiService.getSportif();
 
-        this.planningSeances = this.organizeSeances(this.seances);
-        this.daysOfWeek = Object.keys(this.planningSeances);
-        this.etatLoad = Etatload.SUCCESS;
-        console.log(this.planningSeances);
+    } else {
+      this.apiService.getSeances().subscribe({
+        next: (data) => {
+          this.seances = data.map(
+            (seance: any) =>
+              new Seance(
+                seance.id,
+                new Date(seance.date_heure),
+                seance.type_seance,
+                seance.theme_seance,
+                seance.statut,
+                seance.niveau_seance,
+                seance.exercices,
+                seance.coach_id
+              )
+          );
 
-        console.log(this.daysOfWeek);
-      },
-      error: () => (this.etatLoad = Etatload.ERREUR),
-    });
+          this.planningSeances = this.organizeSeances(this.seances);
+          this.daysOfWeek = Object.keys(this.planningSeances);
+          this.etatLoad = Etatload.SUCCESS;
+          console.log(this.planningSeances);
+
+          console.log(this.daysOfWeek);
+        },
+        error: () => (this.etatLoad = Etatload.ERREUR),
+      });
+    }
   }
 
   organizeSeances(seances: Seance[]): { [key: string]: Seance[] } {

@@ -19,11 +19,11 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['coach:read'])]
+    #[Groups(['coach:read','sportif:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 180)]
-    #[Groups(['coach:read'])]
+    #[Groups(['coach:read','sportif:read'])]
     private ?string $email = null;
 
     /**
@@ -39,11 +39,11 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 100)]
-    #[Groups(['coach:read'])]
+    #[Groups(['coach:read','sportif:read'])]
     private ?string $nom = null;
 
     #[ORM\Column(length: 100)]
-    #[Groups(['coach:read'])]
+    #[Groups(['coach:read','sportif:read'])]
     private ?string $prenom = null;
 
     public function getId(): ?int

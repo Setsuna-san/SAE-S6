@@ -56,5 +56,9 @@ export class ApiService {
     return this.http.get<Exercice[]>(`${this.apiUrl}/seance/${id}/exercices`);
   }
 
+  getSportifById(id: number ): Observable<Coach> {
+    return this.http.get<Coach>(`${this.apiUrl}/sportif/${id}`);
+  }
+
 
 }

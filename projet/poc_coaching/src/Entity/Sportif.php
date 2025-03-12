@@ -25,7 +25,6 @@ class Sportif extends Utilisateur
      * @var Collection<int, Seance>
      */
     #[ORM\ManyToMany(targetEntity: Seance::class, mappedBy: 'sportifs')]
-    #[Groups(['sportif:read'])]
     private Collection $seances;
 
     public function __construct()
@@ -60,10 +59,13 @@ class Sportif extends Utilisateur
     /**
      * @return Collection<int, Seance>
      */
+
+    #[Groups(['sportif:read'])]
     public function getSeances(): Collection
     {
         return $this->seances;
     }
+
 
     public function addSeance(Seance $seance): static
     {

@@ -23,6 +23,14 @@ class SeanceRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findAllOrderedBySportif(): array
+    {
+        return $this->getEntityManager()
+            ->createQuery('SELECT s FROM App\Entity\Seance s ORDER BY s.date_heure ASC')
+            ->getResult();
+    }
+
+
 
     //    /**
     //     * @return Seance[] Returns an array of Seance objects

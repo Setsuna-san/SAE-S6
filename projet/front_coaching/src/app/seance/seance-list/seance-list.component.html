@@ -14,7 +14,7 @@
         <td *ngFor="let jour of daysOfWeek">
           <div *ngFor="let seance of planningSeances[jour]">
             <div class="seance text-black" [ngClass]="isFull(seance) ? 'full' : 'open'"
-              *ngIf="seance.date_heure.getHours() >= hour && seance.date_heure.getHours() < hour + 2">
+              *ngIf="seance.date_heure.getHours() >= hour && seance.date_heure.getHours() < hour + 2" routerLink="/seance/{{seance.id}}">
 
               <span>
                 {{seance.date_heure.getHours()}}h<span *ngIf="seance.date_heure.getMinutes() < 10 ">0</span>{{seance.date_heure.getMinutes()}}
