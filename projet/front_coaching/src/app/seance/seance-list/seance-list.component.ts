@@ -20,19 +20,22 @@ export class SeanceListComponent {
   ngOnInit(): void {
     this.apiService.getSeances().subscribe({
       next: (data) => {
-        this.seances = data.map((seance: any) => new Seance(
-          seance.id,
-          seance.coach_id,
-          seance.date_heure, // Convertir la date en objet Date
-          seance.type_seance,
-          seance.theme_seance,
-          seance.statut,
-          seance.niveau_seance,
-          seance.exercices
-        ));
+        this.seances = data.map(
+          (seance: any) =>
+            new Seance(
+              seance.id,
+              new Date(seance.date_heure),
+              seance.type_seance,
+              seance.theme_seance,
+              seance.statut,
+              seance.niveau_seance,
+              seance.exercices,
+              seance.coach_id
+            )
+        );
 
-        this.planningSeances = this.organizeSeances(this.seances); // Organiser les séances
-        this.daysOfWeek = Object.keys(this.planningSeances); // Extraire les jours du planning
+        this.planningSeances = this.organizeSeances(this.seances);
+        this.daysOfWeek = Object.keys(this.planningSeances);
         this.etatLoad = Etatload.SUCCESS;
         console.log(this.planningSeances);
 
@@ -45,8 +48,12 @@ export class SeanceListComponent {
   organizeSeances(seances: Seance[]): { [key: string]: Seance[] } {
     const planning: { [key: string]: Seance[] } = {};
 
-    seances.forEach(seance => {
-      const date = seance.date_heure.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
+    seances.forEach((seance) => {
+      const date = seance.date_heure.toLocaleDateString('fr-FR', {
+        weekday: 'long',
+        day: 'numeric',
+        month: 'long',
+      });
       const hour = seance.date_heure.getHours();
 
       if (!planning[date]) {
@@ -57,5 +64,32 @@ export class SeanceListComponent {
     });
 
     return planning;
+  }
+
+  isFull(seance: Seance): boolean {
+    switch (seance.type_seance) {
+      case 'Solo':
+        if (seance.exercices.length >= 1) {
+          return true;
+        }
+        return false;
+        break;
+      case 'Duo':
+        if (seance.exercices.length >= 2) {
+          return true;
+        }
+        return false;
+        break;
+      case 'Trio':
+        if (seance.exercices.length >= 3) {
+          return true;
+        }
+        return false;
+        break;
+
+      default:
+        return false;
+        break;
+    }
   }
 }

@@ -9,16 +9,23 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let hour of [6, 9, 12, 15 , 18 , 21  ]"> <!-- Heures de 8h à 20h -->
+      <tr *ngFor="let hour of [6, 8, 10, 12, 14, 16, 18, 20, 22]">
         <td>{{ hour }}h</td>
         <td *ngFor="let jour of daysOfWeek">
           <div *ngFor="let seance of planningSeances[jour]">
-            <span *ngIf="seance.date_heure.getHours() === hour">
-              {{ seance.theme_seance }} ({{ seance.niveau_seance }})
-            </span>
+            <div class="seance text-black" [ngClass]="isFull(seance) ? 'full' : 'open'"
+              *ngIf="seance.date_heure.getHours() >= hour && seance.date_heure.getHours() < hour + 2">
+
+              <span>
+                {{seance.date_heure.getHours()}}h<span *ngIf="seance.date_heure.getMinutes() < 10 ">0</span>{{seance.date_heure.getMinutes()}}
+                <br>
+                {{ seance.theme_seance }} ({{ seance.niveau_seance }})
+              </span>
+            </div>
           </div>
         </td>
       </tr>
+
     </tbody>
   </table>
 </div>

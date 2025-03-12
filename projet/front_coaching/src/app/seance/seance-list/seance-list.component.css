@@ -16,7 +16,26 @@
 .planning-table td div {
   margin: 2px;
   padding: 2px;
-  background-color: #f9f9f9;
   border-radius: 4px;
   font-size: 0.9em;
 }
+
+.full {
+  background-color: rgba(168, 18, 18, 0.573);
+}
+
+.open {
+  background-color: rgba(18, 121, 168, 0.373);
+}
+
+.seance {
+  font-weight: 900;
+  border: 3px solid transparent;
+  cursor: pointer;
+}
+
+
+.seance:hover {
+  border: 3px solid rgba(18, 121, 168, 0.573);
+}
+
