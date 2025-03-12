@@ -13,7 +13,7 @@ class SeanceController extends AbstractController
     #[Route('/api/seances', methods: ['GET'])]
     public function index(SeanceRepository $seanceRepository): JsonResponse
     {
-        $seances = $seanceRepository->findAll();
+        $seances = $seanceRepository->findAllOrdered();
         return $this->json($seances, 200, [], ['groups' => 'seance:read']);
     }
 

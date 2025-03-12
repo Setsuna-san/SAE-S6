@@ -1,0 +1,22 @@
+.planning-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.planning-table th, .planning-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.planning-table th {
+  background-color: #f4f4f4;
+}
+
+.planning-table td div {
+  margin: 2px;
+  padding: 2px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  font-size: 0.9em;
+}

@@ -13,10 +13,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class CoachController extends AbstractController
 {
     #[Route('/api/coachs', methods: ['GET'])]
-    public function index(CoachRepository $coachRepository, UtilisateurRepository $utilisateurRepository): JsonResponse
+    public function index(CoachRepository $coachRepository): JsonResponse
     {
-        $coachs = $utilisateurRepository->findAllByRole("ROLE_COACH");
-        // $coachs = $coachRepository->findAll();
+        $coachs = $coachRepository->findAll();
         return $this->json($coachs, 200, [], ['groups' => 'coach:read']);
     }
 
