@@ -16,6 +16,7 @@ import { SeanceItemComponent } from './seance/seance-item/seance-item.component'
 import { SportifDetailComponent } from './sportif/sportif-detail/sportif-detail.component';
 import { CoachDetailComponent } from './coach/coach-detail/coach-detail.component';
 import { MenuComponent } from './menu/menu.component';
+import { SeanceDetailComponent } from './seance/seance-detail/seance-detail.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { MenuComponent } from './menu/menu.component';
     SportifDetailComponent,
     CoachDetailComponent,
     MenuComponent,
+    SeanceDetailComponent,
   ],
   imports: [HttpClientModule, FormsModule, BrowserModule, AppRoutingModule],
   providers: [

@@ -41,7 +41,7 @@ export class ApiService {
   }
 
   getCoachById(id: number ): Observable<Coach> {
-    return this.http.get<Coach>(`${this.apiUrl}/utilisateur/${id}`);
+    return this.http.get<Coach>(`${this.apiUrl}/coach/${id}`);
   }
 
   getExercices(): Observable<Exercice[]> {
