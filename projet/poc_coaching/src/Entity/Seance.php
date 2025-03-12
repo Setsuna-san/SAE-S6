@@ -56,8 +56,8 @@ class Seance
     private Collection $exercices;
 
     #[ORM\ManyToOne(inversedBy: 'seances')]
-#[ORM\JoinColumn(nullable: false)]
-private ?Coach $Coach = null;
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Coach $Coach = null;
 
     public function __construct()
     {
