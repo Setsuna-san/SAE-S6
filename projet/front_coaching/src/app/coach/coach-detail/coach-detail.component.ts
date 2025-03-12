@@ -34,7 +34,19 @@ export class CoachDetailComponent {
 
     this.apiService.getSeancesByCoachId(this.coach.id).subscribe({
       next: (data) => {
-        this.seances = data;
+        this.seances = data.map(
+          (seance) =>
+            new Seance(
+              seance.id,
+              seance.coach_id,
+              new Date(seance.date_heure), // Convertir la date correctement
+              seance.type_seance,
+              seance.theme_seance,
+              seance.statut,
+              seance.niveau_seance,
+              seance.exercices
+            )
+        );
         this.etatLoadSeances = Etatload.SUCCESS;
       },
       error: () => (this.etatLoadSeances = Etatload.ERREUR),
