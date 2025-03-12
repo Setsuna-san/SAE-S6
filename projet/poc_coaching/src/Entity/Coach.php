@@ -25,9 +25,9 @@ class Coach extends Utilisateur
     /**
      * @var Collection<int, Seance>
      */
-    #[ORM\OneToMany(targetEntity: Seance::class, mappedBy: 'coach_id')]
-    #[Groups(['coach:read'])]
+    #[ORM\OneToMany(targetEntity: Seance::class, mappedBy: 'Coach', orphanRemoval: true)]
     private Collection $seances;
+
 
     public function __construct()
     {
@@ -87,4 +87,8 @@ class Coach extends Utilisateur
 
         return $this;
     }
+
+
+
+
 }

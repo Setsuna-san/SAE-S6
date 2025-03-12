@@ -51,25 +51,20 @@ class SeanceCrudController extends AbstractCrudController
                     'Intermédiaire' => 'intermédiaire',
                     'Avancé' => 'avancé',
                 ]),
+            AssociationField::new('Coach', 'Coach')
+                ->setRequired(true)            
+
         ];
 
         $fields[] = AssociationField::new('exercices', 'Exercices de la Séance')
         ->setFormTypeOptions([
             'by_reference' => false,
         ])
-        ->setRequired(false);
+        ->setRequired(true);
 
-        $coachs = $this->entityManager->getRepository(Coach::class)->findAll(); //entité coach
+        
 
 
-        $fields[] = AssociationField::new('coach', 'Coach Assigné') // entité coach mais vide
-        ->setFormTypeOptions([
-            'choices' => $coachs,
-            'choice_label' => function (Coach $coach) {
-                return $coach->getNom() . ' ' . $coach->getPrenom();
-            },
-        ])
-        ->setRequired(false);
 
         return $fields;
     }

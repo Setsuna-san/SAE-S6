@@ -7,6 +7,7 @@ use App\Repository\SeanceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: SeanceRepository::class)]
@@ -39,10 +40,7 @@ class Seance
     #[Groups('seance:read', 'coach:read', 'sportif:read')]
     private ?string $niveau_seance = null;
 
-    #[ORM\ManyToOne]
-    #[Groups('seance:read', 'coach:read')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Coach $coach = null;
+    
 
     /**
      * @var Collection<int, Sportif>
@@ -56,6 +54,10 @@ class Seance
     #[ORM\ManyToMany(targetEntity: Exercice::class, inversedBy: 'seances')]
     #[Groups('seance:read')]
     private Collection $exercices;
+
+    #[ORM\ManyToOne(inversedBy: 'seances')]
+#[ORM\JoinColumn(nullable: false)]
+private ?Coach $Coach = null;
 
     public function __construct()
     {
@@ -130,18 +132,6 @@ class Seance
         return $this;
     }
 
-    public function getCoach(): ?Coach
-    {
-        return $this->coach;
-    }
-
-    public function setCoach(?Coach $coach): static
-    {
-        $this->coach = $coach;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Sportif>
      */
@@ -188,6 +178,24 @@ class Seance
         $this->exercices->removeElement($exercice);
 
         return $this;
+    }
+
+    public function getCoach(): ?Coach
+    {
+        return $this->Coach;
+    }
+
+    public function setCoach(?Coach $Coach): static
+    {
+        $this->Coach = $Coach;
+
+        return $this;
+    }
+
+    #[Groups('seance:read')]
+    public function getCoachId(): ?int
+    {
+        return $this->Coach ? $this->Coach->getId() : null;
     }
 
 }
