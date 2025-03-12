@@ -16,14 +16,9 @@
       {{coach.nom}} {{coach.prenom}}<br> <br>
 
       <strong>
-        Spécilatée(s) :
+        Spécialitée(s) :
       </strong>
       {{coach.specialites}}<br>
-
-      <strong>
-        Tarif horaire :
-      </strong>
-      {{coach.tarif_horaire}} <br>
 
 
     </div>
@@ -33,7 +28,7 @@
 
     <div class="card-text">
       <ul class="list-unstyled">
-        <li *ngFor="let seance of seances ">
+        <li class="cursor" routerLink="/seance/{{seance.id}}" *ngFor="let seance of seances" >
 
           {{seance.formatDate() }} - {{ seance.exercices.length}} exercices (
           {{seance.statut}} )

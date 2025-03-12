@@ -38,13 +38,13 @@ export class CoachDetailComponent {
           (seance) =>
             new Seance(
               seance.id,
-              seance.coach_id,
               new Date(seance.date_heure), // Convertir la date correctement
               seance.type_seance,
               seance.theme_seance,
               seance.statut,
               seance.niveau_seance,
-              seance.exercices
+              seance.exercices,
+              seance.coachId
             )
         );
         this.etatLoadSeances = Etatload.SUCCESS;
