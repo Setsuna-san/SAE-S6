@@ -20,7 +20,7 @@ class Coach extends Utilisateur
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     #[Groups(['coach:read'])]
-    private ?string $tarif_horaire = null;
+    private ?float $tarif_horaire = null;
 
     /**
      * @var Collection<int, Seance>
@@ -51,7 +51,7 @@ class Coach extends Utilisateur
         return $this->tarif_horaire;
     }
 
-    public function setTarifHoraire(string $tarif_horaire): static
+    public function setTarifHoraire(float $tarif_horaire): static
     {
         $this->tarif_horaire = $tarif_horaire;
 

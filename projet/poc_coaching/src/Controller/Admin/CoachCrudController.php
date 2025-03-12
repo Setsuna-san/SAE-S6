@@ -64,7 +64,9 @@ class CoachCrudController extends AbstractCrudController
                 ->allowMultipleChoices()
                 ->renderExpanded(),
             TextField::new('specialites', 'Spécialités'),
-            MoneyField::new('tarif_horaire', 'Tarif Horaire')->setCurrency('EUR'),
+            MoneyField::new('tarif_horaire', 'Tarif Horaire')
+            ->setCurrency('EUR')
+            ->setStoredAsCents(false),
         ];
     }
 
