@@ -59,28 +59,17 @@ class SeanceCrudController extends AbstractCrudController
         ])
         ->setRequired(false);
 
-        $coachs = $this->entityManager->getRepository(Utilisateur::class)->findAllByRole('ROLE_COACH'); //entité utilisateur avec le role coach
-        // $coachs = $this->entityManager->getRepository(Coach::class)->findAll(); //entité coach
+        $coachs = $this->entityManager->getRepository(Coach::class)->findAll(); //entité coach
 
 
-
-        $fields[] = AssociationField::new('coach', 'Coach Assigné') // entité utilisateur avec le role coach
-            ->setFormTypeOptions([
-                'choices' => $coachs,
-                'choice_label' => function (Utilisateur $user) {
-                    return $user->getNom() . ' ' . $user->getPrenom();
-                },
-            ])
-            ->setRequired(false);
-
-        // $fields[] = AssociationField::new('coach', 'Coach Assigné') // entité coach mais vide
-        // ->setFormTypeOptions([
-        //     'choices' => $coachs,
-        //     'choice_label' => function (Coach $coach) {
-        //         return $coach->getNom() . ' ' . $coach->getPrenom();
-        //     },
-        // ])
-        // ->setRequired(false);
+        $fields[] = AssociationField::new('coach', 'Coach Assigné') // entité coach mais vide
+        ->setFormTypeOptions([
+            'choices' => $coachs,
+            'choice_label' => function (Coach $coach) {
+                return $coach->getNom() . ' ' . $coach->getPrenom();
+            },
+        ])
+        ->setRequired(false);
 
         return $fields;
     }
