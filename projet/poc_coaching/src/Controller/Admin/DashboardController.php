@@ -6,6 +6,7 @@ use App\Entity\Coach;
 use App\Entity\Exercice;
 use App\Entity\FicheDePaie;
 use App\Entity\Seance;
+use App\Entity\Sportif;
 use App\Entity\Utilisateur;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -37,6 +38,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Utilisateurs');
         yield MenuItem::linkToCrud('Utilisateurs', 'fa fa-user', Utilisateur::class);
         yield MenuItem::linkToCrud('Coachs', 'fa fa-user-tie', Coach::class);
+        yield MenuItem::linkToCrud('Sportifs', 'fa fa-person-running', Sportif::class);
 
         yield MenuItem::section('Gestion');
         yield MenuItem::linkToCrud('Séances', 'fa fa-pen', Seance::class);

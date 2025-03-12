@@ -10,6 +10,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SportifController extends AbstractController
 {
+    #[Route('/api/sportifs', methods: ['GET'])]
+    public function index(SportifRepository $sportifRepository): JsonResponse
+    {
+        $sportifs = $sportifRepository->findAll();
+        return $this->json($sportifs, 200, [], ['groups' => 'sportif:read']);
+    }
+
     #[Route('/api/sportif/{id}', methods: ['GET'])]
     public function show(Sportif $sportif): JsonResponse
     {
