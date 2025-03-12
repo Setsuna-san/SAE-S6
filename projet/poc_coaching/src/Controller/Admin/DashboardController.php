@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Coach;
 use App\Entity\Exercice;
 use App\Entity\FicheDePaie;
 use App\Entity\Seance;
@@ -32,13 +33,16 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
-        yield MenuItem::section('Gestion');
-        yield MenuItem::linkToCrud('Utilisateur', 'fa fa-user', Utilisateur::class);
-        yield MenuItem::linkToCrud('Seance', 'fa fa-pen', Seance::class);
-        yield MenuItem::linkToCrud('Exercice', 'fa fa-dumbbell', Exercice::class);
+        
+        yield MenuItem::section('Utilisateurs');
+        yield MenuItem::linkToCrud('Utilisateurs', 'fa fa-user', Utilisateur::class);
+        yield MenuItem::linkToCrud('Coachs', 'fa fa-user-tie', Coach::class);
 
-        yield MenuItem::section('Paie');
+        yield MenuItem::section('Gestion');
+        yield MenuItem::linkToCrud('Séances', 'fa fa-pen', Seance::class);
+        yield MenuItem::linkToCrud('Exercices', 'fa fa-dumbbell', Exercice::class);
+
+        yield MenuItem::section('Gestion de la paie');
         yield MenuItem::linkToCrud('Fiches de paie', 'fa fa-file-text', FicheDePaie::class);
     }
 }
