@@ -61,11 +61,6 @@ class SeanceCrudController extends AbstractCrudController
             'by_reference' => false,
         ])
         ->setRequired(true);
-
-        
-
-
-
         return $fields;
     }
 }
