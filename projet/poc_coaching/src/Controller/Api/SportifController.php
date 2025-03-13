@@ -60,4 +60,31 @@ class SportifController extends AbstractController
 
         return $this->json($sportif, 200, [], ['groups' => 'sportif:read']);
     }
+
+    #[Route('/api/sportif/{id}/seance/{idSeance}', methods: ['DELETE'])]
+    public function deleteSeance(SportifRepository $sportifRepository, SeanceRepository $seanceRepository, EntityManagerInterface $entityManager, int $id, int $idSeance): JsonResponse
+    {
+        $sportif = $sportifRepository->find($id);
+
+        if (!$sportif) {
+            return $this->json(['message' => 'Sportif non trouvé'], 404);
+        }
+        
+        $seance = $seanceRepository->find($idSeance);
+
+        if (!$seance) {
+            return $this->json(['message' => 'Séance non trouvée'], 404);
+        }
+
+        if (!$sportif->getSeances()->contains($seance)) {
+            return $this->json(['message' => 'Séance non associée à ce sportif'], 400);
+        }
+
+        $sportif->removeSeance($seance);
+
+        $entityManager->persist($sportif);
+        $entityManager->flush();
+
+        return $this->json(['message' => 'Séance supprimée avec succès'], 200);
+    }
 }
