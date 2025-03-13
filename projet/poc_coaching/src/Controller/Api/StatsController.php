@@ -27,4 +27,37 @@ class StatsController extends AbstractController
 
         return $this->json($seances);
     }
+
+    #[Route('/seances', name: 'seances', methods: ['GET'])]
+    public function getSeancesRemplissage(SeanceRepository $seanceRepository): JsonResponse
+    {
+        $seances = $seanceRepository->findAll();
+        $stats = [];
+
+        foreach ($seances as $seance) {
+            $capaciteMax = match ($seance->getTypeSeance()) {
+                'solo' => 1,
+                'duo' => 2,
+                'trio' => 3,
+                default => 0
+            };
+
+            $placesOccupees = count($seance->getSportifs());
+            $remplissage = $capaciteMax > 0 ? round(($placesOccupees / $capaciteMax) * 100, 2) . '%' : '0%';
+
+            $stats[] = [
+                'id' => $seance->getId(),
+                'theme_seance' => $seance->getThemeSeance(),
+                'type_seance' => $seance->getTypeSeance(),
+                'places_max' => $capaciteMax,
+                'places_occupees' => $placesOccupees,
+                'remplissage' => $remplissage,
+            ];
+        }
+
+        return $this->json($stats);
+    }
+
 }
+
+
