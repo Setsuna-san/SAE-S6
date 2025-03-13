@@ -11,36 +11,36 @@ use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: SeanceRepository::class)]
-
 class Seance
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups('seance:read', 'coach:read', 'sportif:read')]
+    #[Groups('seance:read', 'coach:read')]
     private ?int $id = null;
+
 
     #[ORM\Column]
     #[Groups('seance:read', 'coach:read', 'sportif:read')]
     private ?\DateTimeImmutable $date_heure = null;
 
     #[ORM\Column(length: 10)]
-    #[Groups('seance:read', 'coach:read', 'sportif:read')]
+    #[Groups('seance:read', 'coach:read')]
     private ?string $type_seance = null;
 
     #[ORM\Column(length: 50)]
-    #[Groups('seance:read', 'coach:read', 'sportif:read')]
+    #[Groups('seance:read', 'coach:read')]
     private ?string $theme_seance = null;
 
     #[ORM\Column(length: 20)]
-    #[Groups('seance:read', 'coach:read', 'sportif:read')]
+    #[Groups('seance:read', 'coach:read')]
     private ?string $statut = null;
 
     #[ORM\Column(length: 20)]
     #[Groups('seance:read', 'coach:read', 'sportif:read')]
     private ?string $niveau_seance = null;
 
-    
+
 
     /**
      * @var Collection<int, Sportif>
@@ -66,11 +66,14 @@ class Seance
     }
 
 
+    #[Groups('sportif:read')]
 
     public function getId(): ?int
     {
         return $this->id;
     }
+
+    #[Groups('sportif:read')]
 
     public function getDateHeure(): ?\DateTimeImmutable
     {
@@ -84,6 +87,8 @@ class Seance
         return $this;
     }
 
+    #[Groups('sportif:read')]
+
     public function getTypeSeance(): ?string
     {
         return $this->type_seance;
@@ -95,6 +100,8 @@ class Seance
 
         return $this;
     }
+
+    #[Groups('sportif:read')]
 
     public function getThemeSeance(): ?string
     {
@@ -108,6 +115,8 @@ class Seance
         return $this;
     }
 
+    #[Groups('sportif:read')]
+
     public function getStatut(): ?string
     {
         return $this->statut;
@@ -119,6 +128,8 @@ class Seance
 
         return $this;
     }
+
+    #[Groups('sportif:read')]
 
     public function getNiveauSeance(): ?string
     {
@@ -135,6 +146,7 @@ class Seance
     /**
      * @return Collection<int, Sportif>
      */
+    #[Groups('seance:read')]
     public function getSportifs(): Collection
     {
         return $this->sportifs;
@@ -159,6 +171,7 @@ class Seance
     /**
      * @return Collection<int, Exercice>
      */
+    #[Groups('sportif:read')]
     public function getExercices(): Collection
     {
         return $this->exercices;
@@ -180,6 +193,7 @@ class Seance
         return $this;
     }
 
+    #[Groups('sportif:read')]
     public function getCoach(): ?Coach
     {
         return $this->Coach;

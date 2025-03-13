@@ -6,6 +6,7 @@ import { Utilisateur } from '../models/utilisateur';
 import { Seance } from '../models/seance';
 import { Coach } from '../models/coach';
 import { Exercice } from '../models/exercice';
+import { Sportif } from '../models/sportif';
 @Injectable({
   providedIn: 'root'
 })
@@ -56,8 +57,12 @@ export class ApiService {
     return this.http.get<Exercice[]>(`${this.apiUrl}/seance/${id}/exercices`);
   }
 
-  getSportifById(id: number ): Observable<Coach> {
-    return this.http.get<Coach>(`${this.apiUrl}/sportif/${id}`);
+  getSportifByEMail(email: string ): Observable<Sportif> {
+    return this.http.get<Sportif>(`${this.apiUrl}/sportif/${email}`);
+  }
+
+  joinSeance(id : number, seance : number ): Observable<Sportif> {
+    return this.http.post<Sportif>(`${this.apiUrl}/sportif/${id}/seance`, seance);
   }
 
 

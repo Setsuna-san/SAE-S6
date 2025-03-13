@@ -10,8 +10,18 @@
 
   </div>
   <div class="card-body m-3 mt-2">
-    <h4 class="card-title">Séance</h4>
+    <h4 class="card-title">Séance </h4>
     <div class="card-text " style="padding-left: 3rem;">
+
+      <strong> Type :
+      </strong>
+      <span *ngIf="etatLoadSeance == etatLoading.LOADING">
+        <i class="fa-solid fa-spinner fa-spin-pulse"></i>
+      </span>
+      <span *ngIf="etatLoadSeance == etatLoading.SUCCESS">
+        {{seance.type_seance}}
+      </span>
+      <br>
 
       <strong> Statut :
       </strong>
@@ -45,8 +55,10 @@
       <span *ngIf="etatLoad == etatLoading.SUCCESS">
         {{coach.nom}} {{coach.prenom}}
       </span>
+
+
       <p class="card-title"> <strong>Particpants : </strong>
-        <span *ngIf="etatLoad == etatLoading.SUCCESS"> {{ seance.exercices.length }} </span>
+        <span *ngIf="etatLoad == etatLoading.SUCCESS"> {{ seance.sportifs.length }} </span>
         <span *ngIf="etatLoad == etatLoading.LOADING"> <i class="fa-solid fa-spinner fa-spin-pulse"></i> </span>
       </p>
 
@@ -102,6 +114,27 @@
         <a routerLink="/" class="btn btn-outline-primary btn-sm">retourner a l'accueil</a>
       </ul>
     </div>
+  </div>
+
+
+
+
+  <div *ngIf="!isFull() && authService.currentAuthUserValue.isLogged() && !isSubscribed()">
+    <a class="btn btn-info" (click)="join()" >Rejoindre la séance</a>
+
+  </div>
+
+  <div *ngIf="isFull() && authService.currentAuthUserValue.isLogged()">
+    <a class="btn btn-info disabled" (click)="join()" >Séance deja pleine</a>
+
+  </div>
+
+
+
+
+  <div *ngIf="authService.currentAuthUserValue.isLogged() && isSubscribed()">
+    <a class="btn btn-info" (click)="leave()" >Quitter la séance</a>
+
   </div>
 
 </div>

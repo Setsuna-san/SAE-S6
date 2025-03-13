@@ -2,10 +2,15 @@
 
 namespace App\Controller\Api;
 
+use App\Entity\Seance;
 use App\Entity\Sportif;
+use App\Repository\SeanceRepository;
 use App\Repository\SportifRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Tools\Debug;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class SportifController extends AbstractController
@@ -17,16 +22,42 @@ class SportifController extends AbstractController
         return $this->json($sportifs, 200, [], ['groups' => 'sportif:read']);
     }
 
-    #[Route('/api/sportif/{id}', methods: ['GET'])]
-    public function show(Sportif $sportif): JsonResponse
+    #[Route('/api/sportif/{email}', methods: ['GET'])]
+    public function show(SportifRepository $sportifRepository, string $email): JsonResponse
     {
-        return $this->json($sportif, 200, [], ['groups' => 'sportif:read']);
+        $sportif = $sportifRepository->findOneBy(['email' => $email]);
+
+        if (!$sportif) {
+            return $this->json(['message' => 'Sportif non trouvé'], 404);
+        }
+
+        return $this->json($sportif, 200, [], ['groups' => 'sportif:read', 'seance:read']);
     }
 
-    #[Route('/api/sportif/{id}/seances', methods: ['GET'])]
-    public function getSeances(Sportif $sportif): JsonResponse
+
+    #[Route('/api/sportif/{id}/seance', methods: ['POST'])]
+    public function addSeance(SportifRepository $sportifRepository, SeanceRepository $seanceRepository, EntityManagerInterface $entityManager, Request $request, int $id): JsonResponse
     {
-        $seances = $sportif->getSeances();
-        return $this->json($seances, 200, [], ['groups' => 'seance:read']);
+        $sportif = $sportifRepository->find($id);
+
+        if (!$sportif) {
+            return $this->json(['message' => 'Sportif non trouvé'], 404);
+        }
+        $data = json_decode($request->getContent(), true);
+
+        if (!$data) {
+            return $this->json(['message' => 'Données invalides'], 400);
+        }
+        $seance = $seanceRepository->findOneBy(["id"=> $data]);
+
+        // $seance->addSportif($sportif);
+        // // Ajouter la séance au sportif
+        $sportif->addSeance($seance);
+
+
+        $entityManager->persist($seance);
+        $entityManager->flush();
+
+        return $this->json($sportif, 200, [], ['groups' => 'sportif:read']);
     }
 }

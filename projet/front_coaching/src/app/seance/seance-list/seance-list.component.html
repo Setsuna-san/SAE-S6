@@ -1,3 +1,14 @@
+
+<br>
+<h1 *ngIf="!this.onPersonnal"> Agenda général </h1>
+<h1 *ngIf="authService.currentAuthUserValue.isLogged() && this.onPersonnal"> Agenda personnel </h1>
+
+<div class="btn btn-success" routerLink="/seances/{{true}}" *ngIf="authService.currentAuthUserValue.isLogged() && !this.onPersonnal">Afficher uniquement mes séances</div>
+<div class="btn btn-success" routerLink="/seances" *ngIf="authService.currentAuthUserValue.isLogged() && this.onPersonnal">Afficher toutes les séances</div>
+
+<br><br>
+
+
 <div *ngIf="etatLoad === etatLoading.SUCCESS">
   <table class="planning-table">
     <thead>
@@ -13,7 +24,12 @@
         <td>{{ hour }}h</td>
         <td *ngFor="let jour of daysOfWeek">
           <div *ngFor="let seance of planningSeances[jour]">
-            <div class="seance text-black" [ngClass]="isFull(seance) ? 'full' : 'open'"
+            <div class="seance text-black"
+            [ngClass]="{
+              'full': isFull(seance),
+              'open': !isFull(seance),
+              'sub': isSubscribed(seance)
+            }"
               *ngIf="seance.date_heure.getHours() >= hour && seance.date_heure.getHours() < hour + 2" routerLink="/seance/{{seance.id}}">
 
               <span>
@@ -33,6 +49,10 @@
 <!-- Affichage si l'état de chargement est en erreur -->
 <div *ngIf="etatLoad === etatLoading.ERREUR">
   <p>Erreur de chargement des séances.</p>
+</div>
+
+<div *ngIf="etatLoad === etatLoading.WAITING">
+  <p>Aucune séance à venir</p>
 </div>
 
 <!-- Affichage si l'état de chargement est en cours -->

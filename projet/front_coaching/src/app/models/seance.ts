@@ -1,4 +1,5 @@
 import { Exercice } from './exercice';
+import { Sportif } from './sportif';
 
 export class Seance {
   constructor(
@@ -9,7 +10,8 @@ export class Seance {
     public statut: string = '',
     public niveau_seance: string = '',
     public exercices: Exercice[] = [],
-    public coachId: number = 0
+    public coachId: number = 0,
+    public sportifs: Sportif[] = []
   ) {}
 
   // Méthode pour formater la date au format "jour mois - heure:minute"

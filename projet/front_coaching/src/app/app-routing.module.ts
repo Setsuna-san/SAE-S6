@@ -11,6 +11,7 @@ import { SeanceDetailComponent } from './seance/seance-detail/seance-detail.comp
 const routes: Routes = [
   { path: '',            component: HomeComponent },
   { path: 'seances',  component: SeanceListComponent },
+  { path: 'seances/:perso',  component: SeanceListComponent },
   { path: 'seance/:id',  component: SeanceDetailComponent },
   { path: 'coachs',  component: CoachListComponent },
   { path: 'coach/:id',  component: CoachDetailComponent },

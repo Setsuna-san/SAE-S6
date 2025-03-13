@@ -19,7 +19,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['coach:read','sportif:read'])]
+    #[Groups(['coach:read','sportif:read', 'seance:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 180)]

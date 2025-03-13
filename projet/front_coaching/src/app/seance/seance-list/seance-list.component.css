@@ -28,6 +28,10 @@
   background-color: rgba(18, 121, 168, 0.373);
 }
 
+.sub {
+  background-color: rgba(18, 168, 91, 0.373);
+}
+
 .seance {
   font-weight: 900;
   border: 3px solid transparent;
@@ -36,6 +40,6 @@
 
 
 .seance:hover {
-  border: 3px solid rgba(18, 121, 168, 0.573);
+  border: 3px solid rgba(0, 0, 0, 0.36);
 }
 

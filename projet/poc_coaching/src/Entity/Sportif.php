@@ -66,7 +66,6 @@ class Sportif extends Utilisateur
         return $this->seances;
     }
 
-
     public function addSeance(Seance $seance): static
     {
         if (!$this->seances->contains($seance)) {
