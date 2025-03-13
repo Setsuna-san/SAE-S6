@@ -43,6 +43,18 @@ class SeanceRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findTopSeances(int $limit): array
+    {
+        return $this->createQueryBuilder('s')
+            ->select('s.id, s.theme_seance, COUNT(sp.id) AS sportif_count')
+            ->leftJoin('s.sportifs', 'sp') 
+            ->groupBy('s.id')
+            ->orderBy('sportif_count', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
 
     //    /**
     //     * @return Seance[] Returns an array of Seance objects
