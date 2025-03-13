@@ -8,11 +8,13 @@ import { CoachListComponent } from './coach/coach-list/coach-list.component';
 import { CoachDetailComponent } from './coach/coach-detail/coach-detail.component';
 import { SeanceDetailComponent } from './seance/seance-detail/seance-detail.component';
 import { SportifDetailComponent } from './sportif/sportif-detail/sportif-detail.component';
+import { ExerciceDetailComponent } from './exercice/exercice-detail/exercice-detail.component';
 
 const routes: Routes = [
   { path: '',            component: HomeComponent },
   { path: 'seances',  component: SeanceListComponent },
   { path: 'profil',  component: SportifDetailComponent },
+  { path: 'exercice/:id',  component: ExerciceDetailComponent },
   { path: 'seances/:perso',  component: SeanceListComponent },
   { path: 'seance/:id',  component: SeanceDetailComponent },
   { path: 'coachs',  component: CoachListComponent },

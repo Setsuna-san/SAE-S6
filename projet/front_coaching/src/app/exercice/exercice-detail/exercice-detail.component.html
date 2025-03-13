@@ -1,0 +1,38 @@
+<div class="card">
+  <div class="card-header">Détail exercice</div>
+  <div class="card-body">
+
+    <div class="card-title">
+      <span *ngIf="etatLoad == etatLoading.LOADING">
+        <i class="fa-solid fa-spinner fa-spin-pulse"></i>
+      </span>
+      <span *ngIf="etatLoad == etatLoading.SUCCESS">
+        {{exercice.nom}}
+      </span>
+    </div>
+    <br>
+    <div class="card-text">
+
+      <strong> Description :
+      </strong>
+      <span *ngIf="etatLoad == etatLoading.LOADING">
+        <i class="fa-solid fa-spinner fa-spin-pulse"></i>
+      </span>
+      <span *ngIf="etatLoad == etatLoading.SUCCESS">
+        {{exercice.description}}
+      </span>
+      <br>
+
+      <strong> Niveau :
+      </strong>
+      <span *ngIf="etatLoad == etatLoading.LOADING">
+        <i class="fa-solid fa-spinner fa-spin-pulse"></i>
+      </span>
+      <span *ngIf="etatLoad == etatLoading.SUCCESS">
+        {{exercice.difficulte}}
+      </span>
+
+    </div>
+  </div>
+</div>
+

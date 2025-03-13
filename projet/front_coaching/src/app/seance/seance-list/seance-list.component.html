@@ -1,11 +1,39 @@
-
 <br>
 <h1 *ngIf="!this.onPersonnal"> Agenda général </h1>
 <h1 *ngIf="authService.currentAuthUserValue.isLogged() && this.onPersonnal"> Agenda personnel </h1>
 
-<div class="btn btn-success" routerLink="/seances/{{true}}" *ngIf="authService.currentAuthUserValue.isLogged() && !this.onPersonnal">Afficher uniquement mes séances</div>
-<div class="btn btn-success" routerLink="/seances" *ngIf="authService.currentAuthUserValue.isLogged() && this.onPersonnal">Afficher toutes les séances</div>
 
+<br>
+<div class="d-flex gap-5 align-items-center">
+
+  <div class="btn btn-success" routerLink="/seances/{{true}}"
+  *ngIf="authService.currentAuthUserValue.isLogged() && !this.onPersonnal">Afficher uniquement mes séances</div>
+<div class="btn btn-success" routerLink="/seances"
+  *ngIf="authService.currentAuthUserValue.isLogged() && this.onPersonnal">Afficher toutes les séances</div>
+
+  <div>
+    <span class="badge bg-info rounded">
+      &nbsp;
+    </span>
+    Cours ouvert
+
+  </div>
+  <div>
+    <span class="badge bg-danger rounded">
+      &nbsp;
+    </span>
+    Cours complet
+
+  </div>
+
+  <div>
+    <span class="badge bg-success rounded">
+      &nbsp;
+    </span>
+    Cours rejoint
+
+  </div>
+</div>
 <br><br>
 
 
@@ -24,16 +52,16 @@
         <td>{{ hour }}h</td>
         <td *ngFor="let jour of daysOfWeek">
           <div *ngFor="let seance of planningSeances[jour]">
-            <div class="seance text-black"
-            [ngClass]="{
+            <div class="seance text-black" [ngClass]="{
               'full': isFull(seance),
               'open': !isFull(seance),
               'sub': isSubscribed(seance)
-            }"
-              *ngIf="seance.date_heure.getHours() >= hour && seance.date_heure.getHours() < hour + 2" routerLink="/seance/{{seance.id}}">
+            }" *ngIf="seance.date_heure.getHours() >= hour && seance.date_heure.getHours() < hour + 2"
+              routerLink="/seance/{{seance.id}}">
 
               <span>
-                {{seance.date_heure.getHours()}}h<span *ngIf="seance.date_heure.getMinutes() < 10 ">0</span>{{seance.date_heure.getMinutes()}}
+                {{seance.date_heure.getHours()}}h<span
+                  *ngIf="seance.date_heure.getMinutes() < 10 ">0</span>{{seance.date_heure.getMinutes()}}
                 <br>
                 {{ seance.theme_seance }} ({{ seance.niveau_seance }})
               </span>

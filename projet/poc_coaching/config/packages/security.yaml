@@ -45,11 +45,16 @@ security:
   access_control:
     - { path: ^/admin, roles: [ROLE_ADMIN, ROLE_COACH] }
     - { path: ^/api/login, roles: PUBLIC_ACCESS }
+    - { path: ^/api/exercice, roles: PUBLIC_ACCESS }
+    - { path: ^/api/coachs, roles: PUBLIC_ACCESS }
+    - { path: ^/api/coach, roles: PUBLIC_ACCESS }
     - {
-        path: ^/api/utilisateurs,
+        path: ^/api/sportif,
         roles: [ROLE_ADMIN, ROLE_SPORTIF, ROLE_COACH],
       }
-    - { path: ^/api/utilisateur, roles: PUBLIC_ACCESS }
+    - { path: ^/api/utilisateur,  roles: [ROLE_ADMIN, ROLE_COACH], }
+    - { path: ^/api/seances, roles: PUBLIC_ACCESS }
+    - { path: ^/api/seance, roles: PUBLIC_ACCESS }
     - { path: ^/api, roles: PUBLIC_ACCESS }
 
 when@test:

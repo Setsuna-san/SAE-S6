@@ -107,5 +107,15 @@ export class SeanceDetailComponent {
     }
   }
 
-  leave() {}
+  leave() {
+    if (this.authService.currentAuthUserValue.isLogged() && this.sportif) {
+      this.apiService.leaveSeance(this.sportif.id, this.seance.id).subscribe({
+        next: () => {
+          this.router.navigateByUrl('/seances/true');
+        },
+        error: () => (this.etatLoad = Etatload.ERREUR),
+      });
+    }
+
+  }
 }

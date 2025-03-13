@@ -10,4 +10,13 @@ export class Sportif {
     public niveau_sportif: string = "",
     public seances: Seance[] = []
   ) {}
+
+  formatDate(): string {
+    const jour = this.date_inscription.getDate();
+    const moisEnTexte = new Intl.DateTimeFormat('fr-FR', {
+      month: 'long',
+    }).format(this.date_inscription);
+
+    return `${jour} ${moisEnTexte} `;
+  }
 }

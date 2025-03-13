@@ -17,6 +17,7 @@ import { SportifDetailComponent } from './sportif/sportif-detail/sportif-detail.
 import { CoachDetailComponent } from './coach/coach-detail/coach-detail.component';
 import { MenuComponent } from './menu/menu.component';
 import { SeanceDetailComponent } from './seance/seance-detail/seance-detail.component';
+import { ExerciceDetailComponent } from './exercice/exercice-detail/exercice-detail.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { SeanceDetailComponent } from './seance/seance-detail/seance-detail.comp
     CoachDetailComponent,
     MenuComponent,
     SeanceDetailComponent,
+    ExerciceDetailComponent,
   ],
   imports: [HttpClientModule, FormsModule, BrowserModule, AppRoutingModule],
   providers: [

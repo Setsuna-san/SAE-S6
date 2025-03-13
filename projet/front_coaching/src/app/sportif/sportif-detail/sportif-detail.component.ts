@@ -9,7 +9,7 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-sportif-detail',
   templateUrl: './sportif-detail.component.html',
-  styleUrl: './sportif-detail.component.css'
+  styleUrl: './sportif-detail.component.css',
 })
 export class SportifDetailComponent {
   public seance: Seance = new Seance();
@@ -35,16 +35,21 @@ export class SportifDetailComponent {
         .getSportifByEMail(this.authService.currentAuthUserValue.email)
         .subscribe({
           next: (data) => {
-            this.sportif = data;
+            this.sportif = new Sportif(
+              data.id,
+              data.email,
+              data.nom,
+              data.prenom,
+              new Date(data.date_inscription),
+              data.niveau_sportif,
+              data.seances
+            );
             this.etatLoad = Etatload.SUCCESS;
-
           },
           error: () => (this.etatLoad = Etatload.ERREUR),
         });
-    }
-
-    else {
-      this.router.navigateByUrl("/login");
+    } else {
+      this.router.navigateByUrl('/login');
     }
   }
 }

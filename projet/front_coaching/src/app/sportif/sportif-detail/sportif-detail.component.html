@@ -13,13 +13,13 @@
     <br>
     <div class="card-text">
 
-      <strong> Inscript depuis :
+      <strong> Inscription :
       </strong>
       <span *ngIf="etatLoad == etatLoading.LOADING">
         <i class="fa-solid fa-spinner fa-spin-pulse"></i>
       </span>
       <span *ngIf="etatLoad == etatLoading.SUCCESS">
-        {{sportif.date_inscription}}
+        {{sportif.formatDate()}}
       </span>
       <br>
 
