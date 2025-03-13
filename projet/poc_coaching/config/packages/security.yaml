@@ -50,7 +50,8 @@ security:
     - { path: ^/api/coach, roles: PUBLIC_ACCESS }
     - {
         path: ^/api/sportif,
-        roles: [ROLE_ADMIN, ROLE_USER, ROLE_COACH],
+        # roles: [ROLE_ADMIN, ROLE_USER, ROLE_COACH],
+        roles: PUBLIC_ACCESS
       }
     - { path: ^/api/utilisateurs,  roles: [ROLE_ADMIN, ROLE_COACH], }
     - { path: ^/api/seances, roles: PUBLIC_ACCESS }
