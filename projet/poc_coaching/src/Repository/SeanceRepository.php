@@ -30,6 +30,18 @@ class SeanceRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findSeancesBySportifAndPeriod(int $sportifId, \DateTime $dateMin, \DateTime $dateMax)
+    {
+        return $this->createQueryBuilder('s')
+            ->join('s.sportifs', 'sp')
+            ->where('sp.id = :sportifId')
+            ->andWhere('s.dateHeure BETWEEN :dateMin AND :dateMax')
+            ->setParameter('sportifId', $sportifId)
+            ->setParameter('dateMin', $dateMin->format('Y-m-d 00:00:00'))
+            ->setParameter('dateMax', $dateMax->format('Y-m-d 23:59:59'))
+            ->getQuery()
+            ->getResult();
+    }
 
 
     //    /**
