@@ -19,17 +19,18 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['coach:read','sportif:read', 'seance:read'])]
+    #[Groups(['coach:read','sportif:read', 'seance:read',  'Utilisateur:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 180)]
-    #[Groups(['coach:read','sportif:read'])]
+    #[Groups(['coach:read','sportif:read', 'Utilisateur:read'])]
     private ?string $email = null;
 
     /**
      * @var list<string> The user roles
      */
     #[ORM\Column]
+    #[Groups(['Utilisateur:read'])]
     private array $roles = [];
 
     /**
@@ -39,11 +40,11 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 100)]
-    #[Groups(['coach:read','sportif:read'])]
+    #[Groups(['coach:read','sportif:read', 'Utilisateur:read'])]
     private ?string $nom = null;
 
     #[ORM\Column(length: 100)]
-    #[Groups(['coach:read','sportif:read'])]
+    #[Groups(['coach:read','sportif:read', 'Utilisateur:read'])]
     private ?string $prenom = null;
 
     public function getId(): ?int

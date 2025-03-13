@@ -12,6 +12,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\HiddenField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -62,6 +63,19 @@ class SportifCrudController extends AbstractCrudController
                 ])
                 ->setRequired($pageName === Crud::PAGE_NEW)
                 ->onlyOnForms(),
+
+
+            ChoiceField::new('roles')
+                ->setLabel('Rôles')
+                ->setFormTypeOptions([
+                    'data' => ['ROLE_USER'],
+                ])
+                ->hideOnIndex()
+                ->hideOnForm()
+
+
+
+
         ];
     }
 

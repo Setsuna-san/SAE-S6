@@ -34,6 +34,17 @@ class SportifController extends AbstractController
         return $this->json($sportif, 200, [], ['groups' => 'sportif:read', 'seance:read']);
     }
 
+    #[Route('/api/sportif/{id}', methods: ['POST'])]
+    public function create(SportifRepository $sportifRepository, SeanceRepository $seanceRepository, EntityManagerInterface $entityManager, Request $request, int $id): JsonResponse
+    {
+        $sportif = $sportifRepository->find($id);
+        $entityManager->persist($sportif);
+        $entityManager->flush();
+
+        return $this->json($sportif, 200, [], ['groups' => 'sportif:read']);
+    }
+
+
 
     #[Route('/api/sportif/{id}/seance', methods: ['POST'])]
     public function addSeance(SportifRepository $sportifRepository, SeanceRepository $seanceRepository, EntityManagerInterface $entityManager, Request $request, int $id): JsonResponse
