@@ -46,7 +46,7 @@ export class SeanceDetailComponent {
 
     this.apiService.getSeanceById(this.seance.id).subscribe({
       next: (data) => {
-        this.seance = data;
+        this.seance = data ;
         this.etatLoadSeance = Etatload.SUCCESS;
         this.apiService.getCoachById(this.seance.coachId).subscribe({
           next: (data) => {
@@ -69,36 +69,29 @@ export class SeanceDetailComponent {
 
   isFull(): boolean {
     switch (this.seance.type_seance) {
-      case 'Solo':
-        if (this.seance.sportifs.length >= 1) {
-          return true;
-        }
-        return false;
-        break;
-      case 'Duo':
-        if (this.seance.sportifs.length >= 2) {
-          return true;
-        }
-        return false;
-        break;
-      case 'Trio':
-        if (this.seance.sportifs.length >= 3) {
-          return true;
-        }
-        return false;
-        break;
+      case 'solo':
+        return this.seance.sportifs.length >= 1;
+
+      case 'duo':
+        return this.seance.sportifs.length >= 2;
+
+      case 'trio':
+        return this.seance.sportifs.length >= 3;
 
       default:
         return false;
-        break;
     }
   }
 
   isSubscribed(): boolean {
     if (this.authService.currentAuthUserValue.isLogged() && this.sportif) {
-      if (this.sportif.seances.includes(this.seance)) {
-        return true;
-      }
+      let isSubscribed = false;
+      this.sportif.seances.forEach((sportifSeance: Seance) => {
+        if (sportifSeance.id === this.seance.id) {
+          isSubscribed = true; // Si on trouve une séance correspondante, on met à true
+        }
+      });
+      return isSubscribed;
     }
     return false;
   }
@@ -114,7 +107,5 @@ export class SeanceDetailComponent {
     }
   }
 
-  leave( ) {
-
-  }
+  leave() {}
 }

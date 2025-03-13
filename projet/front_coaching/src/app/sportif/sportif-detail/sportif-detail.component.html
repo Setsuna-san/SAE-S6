@@ -1,1 +1,57 @@
-<p>sportif-detail works!</p>
+<div class="card">
+  <div class="card-header">Profil</div>
+  <div class="card-body">
+
+    <div class="card-title">
+      <span *ngIf="etatLoad == etatLoading.LOADING">
+        <i class="fa-solid fa-spinner fa-spin-pulse"></i>
+      </span>
+      <span *ngIf="etatLoad == etatLoading.SUCCESS">
+        {{sportif.nom}} {{sportif.prenom}}
+      </span>
+    </div>
+    <br>
+    <div class="card-text">
+
+      <strong> Inscript depuis :
+      </strong>
+      <span *ngIf="etatLoad == etatLoading.LOADING">
+        <i class="fa-solid fa-spinner fa-spin-pulse"></i>
+      </span>
+      <span *ngIf="etatLoad == etatLoading.SUCCESS">
+        {{sportif.date_inscription}}
+      </span>
+      <br>
+
+      <strong> Niveau :
+      </strong>
+      <span *ngIf="etatLoad == etatLoading.LOADING">
+        <i class="fa-solid fa-spinner fa-spin-pulse"></i>
+      </span>
+      <span *ngIf="etatLoad == etatLoading.SUCCESS">
+        {{sportif.niveau_sportif}}
+      </span>
+
+    </div>
+  </div>
+  <div class="card-header">
+    Séances
+  </div>
+  <div class="card-body">
+    <div class="card-text">
+
+      <a routerLink="/seances/true" class="btn btn-info" *ngIf="etatLoad == etatLoading.SUCCESS">
+        Voir mon planning
+      </a>
+      <a routerLink="/seances/true" class="btn btn-info disabled" *ngIf="etatLoad == etatLoading.LOADING">
+
+        Voir mon planning
+
+        <span>
+          <i class="fa-solid fa-spinner fa-spin-pulse"></i>
+        </span>
+      </a>
+
+    </div>
+  </div>
+</div>

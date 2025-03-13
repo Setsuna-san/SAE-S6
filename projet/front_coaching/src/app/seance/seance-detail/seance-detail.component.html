@@ -116,25 +116,30 @@
     </div>
   </div>
 
+  <div class="btn-group">
+    <div *ngIf="etatLoad == etatLoading.SUCCESS">
+      <a *ngIf="isFull() && !authService.currentAuthUserValue.isLogged()  " class="btn btn-info">Aucune place
+        disponible</a>
+      <a *ngIf="!isFull()  && !authService.currentAuthUserValue.isLogged()  " class="btn btn-info">Place disponible ( connection requise ) </a>
+    </div>
 
 
+    <div *ngIf="!isFull() && authService.currentAuthUserValue.isLogged() && !isSubscribed()">
+      <a class="btn btn-info" (click)="join()">Rejoindre la séance</a>
 
-  <div *ngIf="!isFull() && authService.currentAuthUserValue.isLogged() && !isSubscribed()">
-    <a class="btn btn-info" (click)="join()" >Rejoindre la séance</a>
+    </div>
+
+    <div *ngIf="isFull() && authService.currentAuthUserValue.isLogged()">
+      <a class="btn btn-info disabled" >Séance deja pleine</a>
+
+    </div>
+
+    <div *ngIf="authService.currentAuthUserValue.isLogged() && isSubscribed()">
+      <a class="btn btn-warning" (click)="leave()">Quitter la séance</a>
+
+    </div>
 
   </div>
 
-  <div *ngIf="isFull() && authService.currentAuthUserValue.isLogged()">
-    <a class="btn btn-info disabled" (click)="join()" >Séance deja pleine</a>
-
-  </div>
-
-
-
-
-  <div *ngIf="authService.currentAuthUserValue.isLogged() && isSubscribed()">
-    <a class="btn btn-info" (click)="leave()" >Quitter la séance</a>
-
-  </div>
 
 </div>

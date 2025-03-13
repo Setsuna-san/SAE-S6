@@ -65,5 +65,9 @@ export class ApiService {
     return this.http.post<Sportif>(`${this.apiUrl}/sportif/${id}/seance`, seance);
   }
 
+  leaveSeance(id : number, seance : number ): Observable<Sportif> {
+    return this.http.delete<Sportif>(`${this.apiUrl}/sportif/${id}/seance/${seance}`);
+  }
+
 
 }
